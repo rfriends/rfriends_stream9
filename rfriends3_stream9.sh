@@ -7,6 +7,10 @@
 # -----------------------------------------
 SITE=https://github.com/rfriends/rfriends3/releases/latest/download
 SCRIPT=rfriends3_latest_script.zip
+dir=.
+user=`whoami`
+HOME=/home/$user
+userstr="s/rfriendsuser/${user}/g"
 # -----------------------------------------
 echo
 echo rfriends Setup Utility Ver. 2.10
@@ -51,12 +55,14 @@ if [ "$ans" = "y" ]; then
 
 	sudo yum -y install ffmpeg ffmpeg-devel
 	sudo yum -y install at
-    sudo systemctl start atd
-    #sudo yum -y install cronie
+	sudo systemctl start atd
+	#sudo yum -y install cronie
 
 	#sudo yum -y install AtomicParsley
         #wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
         sudo rpm -ivh AtomicParsley-0.9.5-19.fc36.x86_64.rpm 
+
+	sudo yum -y install samba
 
 	#sudo yum -y install libmp4v2
 	#sudo yum -y install gpac
@@ -79,6 +85,26 @@ fi
 #echo
 #echo cd ~/rfriends3
 #echo sh rfriends3.sh
+# -----------------------------------------
+echo
+echo configure samba
+echo
+
+#sudo mkdir -p /var/log/samba
+#sudo chown root.adm /var/log/samba
+
+mkdir -p $HOME/smbdir/usr2/
+
+sudo cp -p /etc/samba/smb.conf /etc/samba/smb.conf.org
+sudo sed -e ${userstr} $dir/smb.conf.skel > $dir/smb.conf
+sudo cp -p $dir/smb.conf /etc/samba/smb.conf
+sudo chown root:root /etc/samba/smb.conf
+# -----------------------------------------
+echo
+echo configure usrdir
+echo
+mkdir -p $HOME/tmp/
+sed -e ${userstr} $dir/usrdir.ini.skel > $HOME/rfriends3/config/usrdir.ini
 # -----------------------------------------
 echo
 echo rfriends3の実行方法(ビルトインサーバ)
