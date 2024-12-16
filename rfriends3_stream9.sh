@@ -55,7 +55,7 @@ if [ "$ans" = "y" ]; then
     #sudo yum -y install cronie
 
 	#sudo yum -y install AtomicParsley
-        wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
+        #wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
         sudo rpm -ivh AtomicParsley-0.9.5-19.fc36.x86_64.rpm 
 
 	#sudo yum -y install libmp4v2
@@ -75,19 +75,19 @@ if [ "$ans" = "y" ]; then
     unzip -q -o $SCRIPT
 fi
 # -----------------------------------------
-//echo rfriends3の実行方法
-//echo
-//echo cd ~/rfriends3
-//echo sh rfriends3.sh
+#echo rfriends3の実行方法
+#echo
+#echo cd ~/rfriends3
+#echo sh rfriends3.sh
 # -----------------------------------------
+echo
 echo rfriends3の実行方法(ビルトインサーバ)
-echo cd ~/
+echo 
 echo rfriends3/rf3server.sh
 echo
 echo 以下が表示されるので、webブラウザでアクセス
 echo
 echo rfriends3_server start
-echo 
 echo xxx.xxx.xxx.xxx:8000
 echo
 # -----------------------------------------
