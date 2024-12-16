@@ -5,7 +5,7 @@ CentOS Stream 9
 Rockey Linux 9.4  
   
 cd ~/  
-sudo apt install git  
+sudo yum install git  
 git clone https://github.com/rfriends/rfriends_stream9.git  
 cd rfriends_stream9  
 sh rfriends3_stream9.sh  
