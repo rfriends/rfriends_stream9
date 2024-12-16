@@ -62,7 +62,7 @@ if [ "$ans" = "y" ]; then
         #wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
         sudo rpm -ivh AtomicParsley-0.9.5-19.fc36.x86_64.rpm 
 
-	sudo yum -y install samba
+	#sudo yum -y install samba
 
 	#sudo yum -y install libmp4v2
 	#sudo yum -y install gpac
@@ -93,18 +93,18 @@ echo
 #sudo mkdir -p /var/log/samba
 #sudo chown root.adm /var/log/samba
 
-mkdir -p $HOME/smbdir/usr2/
+#mkdir -p $HOME/smbdir/usr2/
 
-sudo cp -p /etc/samba/smb.conf /etc/samba/smb.conf.org
-sudo sed -e ${userstr} $dir/smb.conf.skel > $dir/smb.conf
-sudo cp -p $dir/smb.conf /etc/samba/smb.conf
-sudo chown root:root /etc/samba/smb.conf
+#sudo cp -p /etc/samba/smb.conf /etc/samba/smb.conf.org
+#sudo sed -e ${userstr} $dir/smb.conf.skel > $dir/smb.conf
+#sudo cp -p $dir/smb.conf /etc/samba/smb.conf
+#sudo chown root:root /etc/samba/smb.conf
 # -----------------------------------------
 echo
 echo configure usrdir
 echo
-mkdir -p $HOME/tmp/
-sed -e ${userstr} $dir/usrdir.ini.skel > $HOME/rfriends3/config/usrdir.ini
+#mkdir -p $HOME/tmp/
+#sed -e ${userstr} $dir/usrdir.ini.skel > $HOME/rfriends3/config/usrdir.ini
 # -----------------------------------------
 echo
 echo rfriends3の実行方法 [ビルトインサーバ]
