@@ -107,7 +107,7 @@ mkdir -p $HOME/tmp/
 sed -e ${userstr} $dir/usrdir.ini.skel > $HOME/rfriends3/config/usrdir.ini
 # -----------------------------------------
 echo
-echo rfriends3の実行方法(ビルトインサーバ)
+echo rfriends3の実行方法 [ビルトインサーバ]
 echo 
 echo rfriends3/rf3server.sh
 echo
