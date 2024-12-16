@@ -45,30 +45,26 @@ echo "上記ツールをインストールしますか　(y/n) ?"
 read ans
 if [ "$ans" = "y" ]; then
 
-	sudo yum -y install unzip
-
-	sudo yum -y install php-cli
-	sudo yum -y install php-xml
-	sudo yum -y install php-zip
-	sudo yum -y install php-mbstring
-	sudo yum -y install php-json
-
+	sudo yum -y install unzip php-cli php-xml php-zip php-mbstring php-json php-curl php-intl
 	sudo yum -y install ffmpeg ffmpeg-devel
+ 
 	sudo yum -y install at
-	sudo systemctl start atd
-	#sudo yum -y install cronie
-
+ 	#sudo yum -y install cronie
+  
 	#sudo yum -y install AtomicParsley
         #wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
         sudo rpm -ivh AtomicParsley-0.9.5-19.fc36.x86_64.rpm 
-
+	
+	sudo apt -y install chromium
+ 
 	#sudo yum -y install samba
-
+	#sudo apt -y install lighttpd lighttpd-mod-webdav php-cgi
 	#sudo yum -y install libmp4v2
 	#sudo yum -y install gpac
 	#sudo yum -y install ImageMagick
 	#sudo yum -y install swftools
-	#sudo yum -y install curl
+
+ 	sudo systemctl start atd
 fi
 
 echo
