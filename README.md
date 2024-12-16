@@ -12,7 +12,7 @@ git clone https://github.com/rfriends/rfriends_stream9.git
 cd rfriends_stream9  
 sh rfriends3_stream9.sh  
 
-注意） PHP built in serverを起動するとき  
+注意）webブラウザにアドレスを入力するとき  
 http://XXX.XXX.XXX.XXX:8000  
 となっていることを確認してください。  
 http ではエラーになります。
