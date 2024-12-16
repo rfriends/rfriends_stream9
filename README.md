@@ -5,7 +5,7 @@ CentOS Stream 9
 Rockey Linux 9.4  
   
 cd ~/  
-wget -O rfriends_stream9-main.zip https://github.com/rfriends/rfriends_stream9/archive/master.zip  
-unzip rfriends_stream9-main.zip  
-cd rfriends_stream9-main  
+sudo apt install git  
+git clone https://github.com/rfriends/rfriends_stream9.git  
+cd rfriends_stream9  
 sh rfriends3_stream9.sh  
