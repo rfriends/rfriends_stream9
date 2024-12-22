@@ -7,7 +7,7 @@
 # -----------------------------------------
 SITE=https://github.com/rfriends/rfriends3/releases/latest/download
 SCRIPT=rfriends3_latest_script.zip
-dir=.
+dir=$(cd $(dirname $0);pwd)
 user=`whoami`
 HOME=/home/$user
 userstr="s/rfriendsuser/${user}/g"
