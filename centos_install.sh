@@ -42,13 +42,10 @@ echo
 echo install tools
 echo
 # =========================================
-sudo yum update && sudo yum -y install \
-dnsutils p7zip net-tools \  
-php-cli php-xml php-zip php-mbstring php-json php-curl php-intl \
+sudo yum update && sudo yum -y install \ 
+dnsutils p7zip net-tools unzip nano vim tzdata at cronie wget curl \   
+php-cli php-xml php-zip php-mbstring php-json php-curl php-intl \ 
 ffmpeg ffmpeg-devel
-#
-# already installed
-#sudo yum -y unzip nano vim tzdata at cronie wget curl
 
 #sudo yum -y install AtomicParsley
 #wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
