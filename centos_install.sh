@@ -114,7 +114,8 @@ echo install lighttpd
 echo
 # -----------------------------------------
 if [ $optlighttpd="on" ]; then
-sudo yum -y install lighttpd lighttpd-mod-webdav php-cgi
+#sudo yum -y install lighttpd lighttpd-mod-webdav php-cgi
+sudo yum -y install lighttpd php-cgi
 cd $dir
 sudo cp -p /etc/lighttpd/conf-available/15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf.org
 sed -e s%rfriendshomedir%$homedir%g 15-fastcgi-php.conf.skel > 15-fastcgi-php.conf
