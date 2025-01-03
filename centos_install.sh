@@ -43,14 +43,16 @@ echo install tools
 echo
 # =========================================
 sudo yum update && sudo yum -y install \
-unzip p7zip-full nano vim dnsutils iproute2 tzdata \
-at cronie wget curl \
+dnsutils p7zip net-tools \  
 php-cli php-xml php-zip php-mbstring php-json php-curl php-intl \
 ffmpeg ffmpeg-devel
+#
+# already installed
+#sudo yum -y unzip nano vim tzdata at cronie wget curl
 
 #sudo yum -y install AtomicParsley
 #wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
-rpm -ivh AtomicParsley-0.9.5-19.fc36.x86_64.rpm 
+sudo rpm -ivh AtomicParsley-0.9.5-19.fc36.x86_64.rpm 
 
 sudo yum -y install chromium
 sudo yum -y install openssh-server
@@ -87,14 +89,14 @@ echo
 # -----------------------------------------
 if [ $optsamba = "on" ]; then
 sudo yum -y install samba
-mkdir -p /var/log/samba
-chown root:adm /var/log/samba
+sudo mkdir -p /var/log/samba
+sudo chown root:adm /var/log/samba
 
-cp -p /etc/samba/smb.conf /etc/samba/smb.conf.org
+sudo cp -p /etc/samba/smb.conf /etc/samba/smb.conf.org
 sed -e s%rfriendshomedir%$homedir%g $dir/smb.conf.skel > $dir/smb.conf
 sed -i s%rfriendsuser%$user%g $dir/smb.conf
-cp -p $dir/smb.conf /etc/samba/smb.conf
-chown root:root /etc/samba/smb.conf
+sudo cp -p $dir/smb.conf /etc/samba/smb.conf
+sudo chown root:root /etc/samba/smb.conf
 
 mkdir -p $homedir/smbdir/usr2/
 cat <<EOF > $homedir/rfriends3/config/usrdir.ini
@@ -103,10 +105,10 @@ tmpdir = "$homedir/tmp/"
 EOF
 
 if [ $sys = "1" ]; then
-  systemctl enable smbd
-  systemctl restart smbd
+  sudo systemctl enable smbd
+  sudo systemctl restart smbd
 else 
-  service smbd restart
+  sudo service smbd restart
 fi
 fi
 # -----------------------------------------
@@ -117,16 +119,16 @@ echo
 if [ $optlighttpd="on" ]; then
 sudo yum -y install lighttpd lighttpd-mod-webdav php-cgi
 cd $dir
-cp -p /etc/lighttpd/conf-available/15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf.org
+sudo cp -p /etc/lighttpd/conf-available/15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf.org
 sed -e s%rfriendshomedir%$homedir%g 15-fastcgi-php.conf.skel > 15-fastcgi-php.conf
-cp -p 15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf
-chown root:root /etc/lighttpd/conf-available/15-fastcgi-php.conf
+sudo cp -p 15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf
+sudo chown root:root /etc/lighttpd/conf-available/15-fastcgi-php.conf
 
-cp -p /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.org
+sudo cp -p /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.org
 sed -e s%rfriendshomedir%$homedir%g lighttpd.conf.skel > lighttpd.conf
 sed -i s%rfriendsuser%$user%g lighttpd.conf
-cp -p lighttpd.conf /etc/lighttpd/lighttpd.conf
-chown root:root /etc/lighttpd/lighttpd.conf
+sudo cp -p lighttpd.conf /etc/lighttpd/lighttpd.conf
+sudo chown root:root /etc/lighttpd/lighttpd.conf
 
 mkdir -p $homedir/lighttpd/uploads/
 cd $homedir/rfriends3/script/html
