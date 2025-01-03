@@ -116,24 +116,35 @@ echo
 if [ $optlighttpd="on" ]; then
 #sudo yum -y install lighttpd lighttpd-mod-webdav php-cgi
 sudo yum -y install lighttpd php-cgi
+
+LCONF=/etc/lighttpd
+
+HTDOCS=$homedir/rfriends3/script/html
+
+sudo mkdir /var/log/lighttpd
+sudo mkdir /var/lib/lighttpd
+sudo mkdir -p /var/cache/lighttpd
+sudo mkdir $homedir/sockets
+
+mkdir -p $HTDOCS/temp
+ln -s $HTDOCS/temp $HTDOCS/webdav
+
+sudo mv -n $LCONF/lighttpd.conf $LCONF/lighttpd.conf.org
+sudo mv -n $LCONF/modules.conf  $LCONF/modules.conf.org
+sudo mv -n $LCONF/conf.d/fastcgi.conf    $LCONF/conf.d/fastcgi.conf.org
+
 cd $dir
-sudo cp -p /etc/lighttpd/conf-available/15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf.org
-sed -e s%rfriendshomedir%$homedir%g 15-fastcgi-php.conf.skel > 15-fastcgi-php.conf
-sudo cp -p 15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf
-sudo chown root:root /etc/lighttpd/conf-available/15-fastcgi-php.conf
 
-sudo cp -p /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.org
-sed -e s%rfriendshomedir%$homedir%g lighttpd.conf.skel > lighttpd.conf
-sed -i s%rfriendsuser%$user%g lighttpd.conf
-sudo cp -p lighttpd.conf /etc/lighttpd/lighttpd.conf
-sudo chown root:root /etc/lighttpd/lighttpd.conf
+sudo cp -f lighttpd.conf $LCONF/lighttpd.conf
+sudo cp -f modules.conf  $LCONF/modules.conf
+sudo cp -f fastcgi.conf  $LCONF/conf.d/fastcgi.conf 
 
-mkdir -p $homedir/lighttpd/uploads/
-cd $homedir/rfriends3/script/html
-ln -nfs temp webdav
-cd $homedir
-lighttpd-enable-mod fastcgi
-lighttpd-enable-mod fastcgi-php
+sudo sed -i 's/#webdav.is-readonly/webdav.is-readonly/'       $LCONF/conf.d/webdav.conf
+sudo sed -i 's/#webdav.sqlite-db-name/webdav.sqlite-db-name/' $LCONF/conf.d/webdav.conf
+sudo sed -i 's/webdav.sqlite-db-name/#webdav.sqlite-db-name/' $LCONF/conf.d/webdav.conf
+sudo sed -i 's/#dir-listing.activate/dir-listing.activate/'   $LCONF/conf.d/dirlisting.conf
+sudo sed -i 's/#dir-listing.external-css/dir-listing.external-css' $LCONF/conf.d/dirlisting.conf
+
 echo lighttpd > $homedir/rfriends3/rfriends3_boot.txt
 
 if [ $sys = "1" ]; then
