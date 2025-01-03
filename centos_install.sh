@@ -1,0 +1,186 @@
+#!/bin/bash
+# =========================================
+# install rfriends for centos
+# =========================================
+# 1.0 2025/01/04 github
+ver=1.0
+# -----------------------------------------
+echo
+echo rfriends3 for centos $ver
+echo `date`
+echo
+# -----------------------------------------
+sys=`pgrep -o systemd`
+ar=`dpkg --print-architecture`
+bit=`getconf LONG_BIT`
+#
+if [ -z "$optlighttpd" ]; then
+  optlighttpd="on"
+fi
+if [ -z "$optsamba" ]; then
+  optsamba="on"
+fi
+if [ "$optlighttpd" != "on" ]; then
+  optlighttpd="off"
+fi
+if [ "$optsamba" != "on" ]; then
+  optsamba="off"
+fi
+#
+dir=$(cd $(dirname $0);pwd)
+user=`whoami`
+if [ -z $HOME ]; then
+  homedir=`sh -c 'cd && pwd'`
+else
+  homedir=$HOME
+fi
+#
+SITE=https://github.com/rfriends/rfriends3/releases/latest/download
+SCRIPT=rfriends3_latest_script.zip
+# =========================================
+echo
+echo install tools
+echo
+# =========================================
+yum update && yum -y install \
+unzip p7zip-full nano vim dnsutils iproute2 tzdata \
+at cronie wget curl \
+php-cli php-xml php-zip php-mbstring php-json php-curl php-intl \
+ffmpeg ffmpeg-devel
+
+#yum -y install AtomicParsley
+#wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
+rpm -ivh AtomicParsley-0.9.5-19.fc36.x86_64.rpm 
+
+yum -y install chromium
+yum -y install openssh-server
+# -----------------------------------------
+# .vimrcを設定する
+# -----------------------------------------
+cd $homedir
+mv -n .vimrc .vimrc.org
+cat <<EOF > .vimrc
+set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileformats=unix,dos,mac
+EOF
+chmod 644 .vimrc
+# =========================================
+echo
+echo install rfriends3
+echo
+# =========================================
+cd $homedir
+rm -f $SCRIPT
+wget $SITE/$SCRIPT
+unzip -q -o $SCRIPT
+
+mkdir -p $homedir/tmp/
+cat <<EOF > $homedir/rfriends3/config/usrdir.ini
+usrdir = "$homedir/rfriends3/usr/"
+tmpdir = "$homedir/tmp/"
+EOF
+# -----------------------------------------
+echo
+echo install samba
+echo
+# -----------------------------------------
+if [ $optsamba = "on" ]; then
+yum -y install samba
+mkdir -p /var/log/samba
+chown root:adm /var/log/samba
+
+cp -p /etc/samba/smb.conf /etc/samba/smb.conf.org
+sed -e s%rfriendshomedir%$homedir%g $dir/smb.conf.skel > $dir/smb.conf
+sed -i s%rfriendsuser%$user%g $dir/smb.conf
+cp -p $dir/smb.conf /etc/samba/smb.conf
+chown root:root /etc/samba/smb.conf
+
+mkdir -p $homedir/smbdir/usr2/
+cat <<EOF > $homedir/rfriends3/config/usrdir.ini
+usrdir = "$homedir/smbdir/usr2/"
+tmpdir = "$homedir/tmp/"
+EOF
+
+if [ $sys = "1" ]; then
+  systemctl enable smbd
+  systemctl restart smbd
+else 
+  service smbd restart
+fi
+fi
+# -----------------------------------------
+echo
+echo install lighttpd
+echo
+# -----------------------------------------
+if [ $optlighttpd="on" ]; then
+yum -y install lighttpd lighttpd-mod-webdav php-cgi
+cd $dir
+cp -p /etc/lighttpd/conf-available/15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf.org
+sed -e s%rfriendshomedir%$homedir%g 15-fastcgi-php.conf.skel > 15-fastcgi-php.conf
+cp -p 15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf
+chown root:root /etc/lighttpd/conf-available/15-fastcgi-php.conf
+
+cp -p /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.org
+sed -e s%rfriendshomedir%$homedir%g lighttpd.conf.skel > lighttpd.conf
+sed -i s%rfriendsuser%$user%g lighttpd.conf
+cp -p lighttpd.conf /etc/lighttpd/lighttpd.conf
+chown root:root /etc/lighttpd/lighttpd.conf
+
+mkdir -p $homedir/lighttpd/uploads/
+cd $homedir/rfriends3/script/html
+ln -nfs temp webdav
+cd $homedir
+lighttpd-enable-mod fastcgi
+lighttpd-enable-mod fastcgi-php
+echo lighttpd > $homedir/rfriends3/rfriends3_boot.txt
+
+if [ $sys = "1" ]; then
+  systemctl enable lighttpd
+  systemctl restart lighttpd
+else 
+  service lighttpd restart
+fi
+fi
+# -----------------------------------------
+# systemd or service
+# -----------------------------------------
+if [ $sys = "1" ]; then
+  systemctl enable atd
+  systemctl enable cron
+else 
+  service atd restart
+  service cron restart
+fi
+# -----------------------------------------
+echo
+echo architecture : $ar $bit bits
+if [ $sys = "1" ]; then
+  echo "type : systemd" 
+else 
+  echo "type : initd"
+fi
+echo samba : $optsamba
+echo lighttpd : $optlighttpd
+echo
+echo current directry : $dir
+echo user : $user
+echo home directry : $homedir
+# -----------------------------------------
+#  アクセスアドレス
+# -----------------------------------------
+cd $homedir
+port=8000
+ip=`sh $homedir/rfriends3/getIP.sh`
+server=${ip}:${port}
+echo
+echo システムを再起動後、
+echo ブラウザで、http://$server にアクセスしてください。
+echo
+# -----------------------------------------
+# finish
+# -----------------------------------------
+echo `date`
+echo finished rfriends_centos
+# -----------------------------------------
