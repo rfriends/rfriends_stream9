@@ -102,8 +102,8 @@ tmpdir = "$homedir/tmp/"
 EOF
 
 if [ $sys = "1" ]; then
-  sudo systemctl enable smbd
-  sudo systemctl restart smbd
+  sudo systemctl enable smb
+  sudo systemctl restart smb
 else 
   sudo service smbd restart
 fi
