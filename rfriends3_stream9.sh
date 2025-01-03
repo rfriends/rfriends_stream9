@@ -23,11 +23,11 @@ timedatectl set-timezone Asia/Tokyo
 echo
 echo RPM Fusion リポジトリを追加
 echo
-yum install epel-release
-yum config-manager --set-enabled crb
+sudo yum install epel-release
+sudo yum config-manager --set-enabled crb
 
-yum install --nogpgcheck https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm -y
-yum install --nogpgcheck https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm -y
+sudo yum install --nogpgcheck https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm -y
+sudo yum install --nogpgcheck https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm -y
 
 # -----------------------------------------
 optlighttpd="on"
