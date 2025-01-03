@@ -42,18 +42,18 @@ echo
 echo install tools
 echo
 # =========================================
-yum update && yum -y install \
+sudo yum update && sudo yum -y install \
 unzip p7zip-full nano vim dnsutils iproute2 tzdata \
 at cronie wget curl \
 php-cli php-xml php-zip php-mbstring php-json php-curl php-intl \
 ffmpeg ffmpeg-devel
 
-#yum -y install AtomicParsley
+#sudo yum -y install AtomicParsley
 #wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
 rpm -ivh AtomicParsley-0.9.5-19.fc36.x86_64.rpm 
 
-yum -y install chromium
-yum -y install openssh-server
+sudo yum -y install chromium
+sudo yum -y install openssh-server
 # -----------------------------------------
 # .vimrcを設定する
 # -----------------------------------------
@@ -86,7 +86,7 @@ echo install samba
 echo
 # -----------------------------------------
 if [ $optsamba = "on" ]; then
-yum -y install samba
+sudo yum -y install samba
 mkdir -p /var/log/samba
 chown root:adm /var/log/samba
 
@@ -115,7 +115,7 @@ echo install lighttpd
 echo
 # -----------------------------------------
 if [ $optlighttpd="on" ]; then
-yum -y install lighttpd lighttpd-mod-webdav php-cgi
+sudo yum -y install lighttpd lighttpd-mod-webdav php-cgi
 cd $dir
 cp -p /etc/lighttpd/conf-available/15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf.org
 sed -e s%rfriendshomedir%$homedir%g 15-fastcgi-php.conf.skel > 15-fastcgi-php.conf
