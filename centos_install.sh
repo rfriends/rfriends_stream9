@@ -150,6 +150,7 @@ cd $dir
 
 sed -e s%rfriendshomedir%${homedir}%g lighttpd.conf.skel > lighttpd.conf
 sed -i s%rfriendsuser%${user}%g lighttpd.conf
+sed -i s%rfriendsgroup%${group}%g lighttpd.conf
 sudo cp -p lighttpd.conf $LCONF/lighttpd.conf
 sudo chown root:root $LCONF/lighttpd.conf
 
