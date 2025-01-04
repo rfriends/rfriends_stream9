@@ -159,7 +159,6 @@ sudo cp -p fastcgi.conf $LCONF/conf.d/fastcgi.conf
 sudo chown root:root $LCONF/conf.d/fastcgi.conf
 
 sudo cp -f modules.conf  $LCONF/modules.conf
-#sudo cp -f fastcgi.conf  $LCONF/conf.d/fastcgi.conf 
 
 sudo sed -i 's/#webdav.is-readonly/webdav.is-readonly/'       $LCONF/conf.d/webdav.conf
 sudo sed -i 's/#webdav.sqlite-db-name/webdav.sqlite-db-name/' $LCONF/conf.d/webdav.conf
