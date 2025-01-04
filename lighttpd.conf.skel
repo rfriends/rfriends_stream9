@@ -13,17 +13,18 @@
 ## chroot example as well.
 ##
 #var.log_root    = "/var/log/lighttpd"
-var.log_root = "/home/mapi/lighttpd"
+var.log_root = "rfriendshomedir/lighttpd"
 #var.server_root = "/var/www"
-var.server_root = "/home/mapi/rfriends3"
+var.server_root = "rfriendshomedir/rfriends3"
 var.state_dir   = "/run/lighttpd"
-var.home_dir    = "/var/lib/lighttpd"
+#var.home_dir    = "/var/lib/lighttpd"
+var.home_dir    = "rfriendshomedir/lighttpd"
 var.conf_dir    = "/etc/lighttpd"
 
 server.document-root        = server_root + "/script/html"
-server.upload-dirs          = ( "/home/mapi/lighttpd/uploads" )
-server.username             = "mapi"
-server.groupname            = "mapi"
+server.upload-dirs          = ( "rfriendshomedir/lighttpd/uploads" )
+server.username             = "rfriendsuser"
+server.groupname            = "rfriendsgroup"
 server.port                 = 8000
 ## 
 ## run the server chrooted.
@@ -91,7 +92,7 @@ include conf_dir + "/modules.conf"
 ##  Basic Configuration
 ## ---------------------
 ##
-#server.port = 8000
+#server.port = 80
 
 ##
 ## Use IPv6?
