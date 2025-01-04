@@ -15,7 +15,7 @@
 ##
 var.log_root    = "/var/log/lighttpd"
 #var.server_root = "/var/www"
-var.server_root = "rfriendshomedir/rfriends3/script/html"
+var.server_root = "rfriendshomedir/rfriends3"
 var.state_dir   = "/run/lighttpd"
 var.home_dir    = "/var/lib/lighttpd"
 var.conf_dir    = "/etc/lighttpd"
