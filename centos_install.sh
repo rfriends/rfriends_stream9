@@ -40,7 +40,7 @@ echo
 echo install tools
 echo
 # =========================================
-sudo yum update 
+sudo yum update -y
 sudo yum -y install dnsutils p7zip net-tools unzip nano vim tzdata at cronie wget curl 
 sudo yum -y install php-cli php-xml php-zip php-mbstring php-json php-curl php-intl 
 sudo yum -y install ffmpeg ffmpeg-devel
