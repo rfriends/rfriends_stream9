@@ -41,7 +41,8 @@ echo install tools
 echo
 # =========================================
 sudo yum update -y
-sudo yum -y install dnsutils p7zip net-tools unzip nano vim tzdata at cronie wget curl 
+
+sudo yum -y install p7zip net-tools
 sudo yum -y install php-cli php-xml php-zip php-mbstring php-json php-curl php-intl 
 sudo yum -y install ffmpeg ffmpeg-devel
 
@@ -51,6 +52,8 @@ sudo rpm -ivh AtomicParsley-0.9.5-19.fc36.x86_64.rpm
 
 sudo yum -y install chromium
 sudo yum -y install openssh-server
+
+sudo yum -y install dnsutils unzip nano vim tzdata at cronie wget curl 
 # -----------------------------------------
 # .vimrcを設定する
 # -----------------------------------------
