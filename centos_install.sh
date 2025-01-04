@@ -200,6 +200,19 @@ echo current directry : $dir
 echo user : $user
 echo home directry : $homedir
 # -----------------------------------------
+#  ビルトインサーバ
+#
+echo
+echo rfriends3の実行方法
+echo 
+echo sh $homedir/rfriends3/rf3server.sh
+echo
+echo 以下が表示されるので、webブラウザでアクセス
+echo
+echo rfriends3_server start
+echo xxx.xxx.xxx.xxx:8000
+echo
+# -----------------------------------------
 # finish
 # -----------------------------------------
 echo `date`
