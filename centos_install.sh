@@ -165,7 +165,7 @@ fi
 # -----------------------------------------
 if [ $sys = "1" ]; then
   sudo systemctl enable atd
-  sudo systemctl enable cron
+  sudo systemctl enable crond
 else 
   sudo service atd restart
   sudo service cron restart
