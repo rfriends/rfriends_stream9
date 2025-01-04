@@ -82,6 +82,7 @@ echo
 echo install samba
 echo
 # -----------------------------------------
+echo samba $optsamba
 if [ $optsamba = "on" ]; then
 sudo yum -y install samba
 sudo mkdir -p /var/log/samba
@@ -111,6 +112,7 @@ echo
 echo install lighttpd
 echo
 # -----------------------------------------
+echo lighttpd $optlighttpd
 if [ $optlighttpd="on" ]; then
 #sudo yum -y install lighttpd lighttpd-mod-webdav php-cgi
 sudo yum -y install lighttpd php-cgi
