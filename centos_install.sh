@@ -151,26 +151,26 @@ sudo sed -i 's/#webdav.is-readonly/webdav.is-readonly/'       $LCONF/conf.d/webd
 sudo sed -i 's/#webdav.sqlite-db-name/webdav.sqlite-db-name/' $LCONF/conf.d/webdav.conf
 sudo sed -i 's/webdav.sqlite-db-name/#webdav.sqlite-db-name/' $LCONF/conf.d/webdav.conf
 sudo sed -i 's/#dir-listing.activate/dir-listing.activate/'   $LCONF/conf.d/dirlisting.conf
-sudo sed -i 's/#dir-listing.external-css/dir-listing.external-css' $LCONF/conf.d/dirlisting.conf
+sudo sed -i 's/#dir-listing.external-css/dir-listing.external-css/' $LCONF/conf.d/dirlisting.conf
 
 echo lighttpd > $homedir/rfriends3/rfriends3_boot.txt
 
 if [ $sys = "1" ]; then
-  systemctl enable lighttpd
-  systemctl restart lighttpd
+  sudo systemctl enable lighttpd
+  sudo systemctl restart lighttpd
 else 
-  service lighttpd restart
+  sudo service lighttpd restart
 fi
 fi
 # -----------------------------------------
 # systemd or service
 # -----------------------------------------
 if [ $sys = "1" ]; then
-  systemctl enable atd
-  systemctl enable cron
+  sudo systemctl enable atd
+  sudo systemctl enable cron
 else 
-  service atd restart
-  service cron restart
+  sudo service atd restart
+  sudo service cron restart
 fi
 # -----------------------------------------
 echo
