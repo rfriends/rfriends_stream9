@@ -11,8 +11,6 @@ echo `date`
 echo
 # -----------------------------------------
 sys=`pgrep -o systemd`
-ar=`dpkg --print-architecture`
-bit=`getconf LONG_BIT`
 #
 if [ -z "$optlighttpd" ]; then
   optlighttpd="on"
@@ -174,7 +172,6 @@ else
 fi
 # -----------------------------------------
 echo
-echo architecture : $ar $bit bits
 if [ $sys = "1" ]; then
   echo "type : systemd" 
 else 
