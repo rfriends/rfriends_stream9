@@ -131,13 +131,17 @@ ln -s $HTDOCS/temp $HTDOCS/webdav
 
 sudo mv -n $LCONF/lighttpd.conf $LCONF/lighttpd.conf.org
 sudo mv -n $LCONF/modules.conf  $LCONF/modules.conf.org
-sudo mv -n $LCONF/conf.d/fastcgi.conf    $LCONF/conf.d/fastcgi.conf.org
+#sudo mv -n $LCONF/conf.d/fastcgi.conf    $LCONF/conf.d/fastcgi.conf.org
 
 cd $dir
 
-sudo cp -f lighttpd.conf $LCONF/lighttpd.conf
+sed -e s%rfriendshomedir%$homedir%g lighttpd.conf.skel > lighttpd.conf
+sed -i s%rfriendsuser%$user%g lighttpd.conf
+sudo cp -p lighttpd.conf $LCONF/lighttpd.conf
+sudo chown root:root $LCONF/lighttpd.conf
+
 sudo cp -f modules.conf  $LCONF/modules.conf
-sudo cp -f fastcgi.conf  $LCONF/conf.d/fastcgi.conf 
+#sudo cp -f fastcgi.conf  $LCONF/conf.d/fastcgi.conf 
 
 sudo sed -i 's/#webdav.is-readonly/webdav.is-readonly/'       $LCONF/conf.d/webdav.conf
 sudo sed -i 's/#webdav.sqlite-db-name/webdav.sqlite-db-name/' $LCONF/conf.d/webdav.conf
