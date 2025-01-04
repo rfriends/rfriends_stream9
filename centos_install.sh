@@ -113,7 +113,7 @@ echo install lighttpd
 echo
 # -----------------------------------------
 echo lighttpd $optlighttpd
-if [ $optlighttpd="on" ]; then
+if [ $optlighttpd = "on" ]; then
 #sudo yum -y install lighttpd lighttpd-mod-webdav php-cgi
 sudo yum -y install lighttpd php-cgi
 
