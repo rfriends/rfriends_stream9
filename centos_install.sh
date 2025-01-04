@@ -81,6 +81,16 @@ usrdir = "$homedir/rfriends3/usr/"
 tmpdir = "$homedir/tmp/"
 EOF
 # -----------------------------------------
+# systemd or service
+# -----------------------------------------
+if [ $sys = "1" ]; then
+  sudo systemctl enable atd
+  sudo systemctl enable crond
+else 
+  sudo service atd restart
+  sudo service cron restart
+fi
+# -----------------------------------------
 echo
 echo install samba
 echo
@@ -164,16 +174,17 @@ if [ $sys = "1" ]; then
 else 
   sudo service lighttpd restart
 fi
-fi
 # -----------------------------------------
-# systemd or service
+#  アクセスアドレス
 # -----------------------------------------
-if [ $sys = "1" ]; then
-  sudo systemctl enable atd
-  sudo systemctl enable crond
-else 
-  sudo service atd restart
-  sudo service cron restart
+cd $homedir
+port=8000
+ip=`sh $homedir/rfriends3/getIP.sh`
+server=${ip}:${port}
+echo
+echo システムを再起動後、
+echo ブラウザで、http://$server にアクセスしてください。
+echo
 fi
 # -----------------------------------------
 echo
@@ -188,17 +199,6 @@ echo
 echo current directry : $dir
 echo user : $user
 echo home directry : $homedir
-# -----------------------------------------
-#  アクセスアドレス
-# -----------------------------------------
-cd $homedir
-port=8000
-ip=`sh $homedir/rfriends3/getIP.sh`
-server=${ip}:${port}
-echo
-echo システムを再起動後、
-echo ブラウザで、http://$server にアクセスしてください。
-echo
 # -----------------------------------------
 # finish
 # -----------------------------------------
