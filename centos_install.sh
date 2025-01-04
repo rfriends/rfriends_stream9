@@ -121,10 +121,10 @@ LCONF=/etc/lighttpd
 
 HTDOCS=$homedir/rfriends3/script/html
 
-sudo mkdir /var/log/lighttpd
-sudo mkdir /var/lib/lighttpd
+sudo mkdir -p /var/log/lighttpd
+sudo mkdir -p /var/lib/lighttpd
 sudo mkdir -p /var/cache/lighttpd
-sudo mkdir $homedir/sockets
+mkdir $homedir/sockets
 
 mkdir -p $HTDOCS/temp
 ln -s $HTDOCS/temp $HTDOCS/webdav
@@ -135,12 +135,12 @@ sudo mv -n $LCONF/modules.conf  $LCONF/modules.conf.org
 
 cd $dir
 
-sed -e s%rfriendshomedir%$homedir%g lighttpd.conf.skel > lighttpd.conf
-sed -i s%rfriendsuser%$user%g lighttpd.conf
+sed -e s%rfriendshomedir%${homedir}%g lighttpd.conf.skel > lighttpd.conf
+sed -i s%rfriendsuser%${user}%g lighttpd.conf
 sudo cp -p lighttpd.conf $LCONF/lighttpd.conf
 sudo chown root:root $LCONF/lighttpd.conf
 
-sed -e s%rfriendshomedir%$homedir%g fastcgi.conf.skel > fastcgi.conf
+sed -e s%rfriendshomedir%${homedir}%g fastcgi.conf.skel > fastcgi.conf
 sudo cp -p fastcgi.conf $LCONF/conf.d/fastcgi.conf
 sudo chown root:root $LCONF/conf.d/fastcgi.conf
 
