@@ -140,6 +140,10 @@ sed -i s%rfriendsuser%$user%g lighttpd.conf
 sudo cp -p lighttpd.conf $LCONF/lighttpd.conf
 sudo chown root:root $LCONF/lighttpd.conf
 
+sed -e s%rfriendshomedir%$homedir%g fastcgi.conf.skel > fastcgi.conf
+sudo cp -p fastcgi.conf $LCONF/conf.d/fastcgi.conf
+sudo chown root:root $LCONF/conf.d/fastcgi.conf
+
 sudo cp -f modules.conf  $LCONF/modules.conf
 #sudo cp -f fastcgi.conf  $LCONF/conf.d/fastcgi.conf 
 
