@@ -11,6 +11,9 @@ echo `date`
 echo
 # -----------------------------------------
 sys=`pgrep -o systemd`
+if [ $? -ne 0]; then
+sys=0
+fi
 #
 if [ -z "$optlighttpd" ]; then
   optlighttpd="on"
