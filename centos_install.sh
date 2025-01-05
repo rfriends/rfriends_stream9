@@ -11,7 +11,7 @@ echo `date`
 echo
 # -----------------------------------------
 sys=`pgrep -o systemd`
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
 sys=0
 fi
 #
