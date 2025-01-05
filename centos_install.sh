@@ -126,66 +126,7 @@ echo install lighttpd
 echo
 # -----------------------------------------
 echo lighttpd $optlighttpd
-if [ $optlighttpd = "ignore" ]; then
-#sudo yum -y install lighttpd lighttpd-mod-webdav php-cgi
-sudo yum -y install lighttpd php-cgi
-
-LCONF=/etc/lighttpd
-
-HTDOCS=$homedir/rfriends3/script/html
-
-sudo mkdir -p /var/log/lighttpd
-sudo mkdir -p /var/lib/lighttpd
-sudo mkdir -p /var/cache/lighttpd
-mkdir $homedir/sockets
-
-mkdir -p $HTDOCS/temp
-ln -s $HTDOCS/temp $HTDOCS/webdav
-
-sudo mv -n $LCONF/lighttpd.conf $LCONF/lighttpd.conf.org
-sudo mv -n $LCONF/modules.conf  $LCONF/modules.conf.org
-#sudo mv -n $LCONF/conf.d/fastcgi.conf    $LCONF/conf.d/fastcgi.conf.org
-
-cd $dir
-
-sed -e s%rfriendshomedir%${homedir}%g lighttpd.conf.skel > lighttpd.conf
-sed -i s%rfriendsuser%${user}%g lighttpd.conf
-sed -i s%rfriendsgroup%${group}%g lighttpd.conf
-sudo cp -p lighttpd.conf $LCONF/lighttpd.conf
-sudo chown root:root $LCONF/lighttpd.conf
-
-sed -e s%rfriendshomedir%${homedir}%g fastcgi.conf.skel > fastcgi.conf
-sudo cp -p fastcgi.conf $LCONF/conf.d/fastcgi.conf
-sudo chown root:root $LCONF/conf.d/fastcgi.conf
-
-sudo cp -f modules.conf  $LCONF/modules.conf
-
-sudo sed -i 's/#webdav.is-readonly/webdav.is-readonly/'       $LCONF/conf.d/webdav.conf
-sudo sed -i 's/#webdav.sqlite-db-name/webdav.sqlite-db-name/' $LCONF/conf.d/webdav.conf
-sudo sed -i 's/webdav.sqlite-db-name/#webdav.sqlite-db-name/' $LCONF/conf.d/webdav.conf
-sudo sed -i 's/#dir-listing.activate/dir-listing.activate/'   $LCONF/conf.d/dirlisting.conf
-sudo sed -i 's/#dir-listing.external-css/dir-listing.external-css/' $LCONF/conf.d/dirlisting.conf
-
-echo lighttpd > $homedir/rfriends3/rfriends3_boot.txt
-
-if [ $sys = "1" ]; then
-  sudo systemctl enable lighttpd
-  sudo systemctl restart lighttpd
-else 
-  sudo service lighttpd restart
-fi
-# -----------------------------------------
-#  アクセスアドレス
-# -----------------------------------------
-cd $homedir
-port=8000
-ip=`sh $homedir/rfriends3/getIP.sh`
-server=${ip}:${port}
-echo
-echo システムを再起動後、
-echo ブラウザで、http://$server にアクセスしてください。
-echo
-fi
+echo not support
 # -----------------------------------------
 echo
 if [ $sys = "1" ]; then
@@ -205,7 +146,8 @@ echo home directry : $homedir
 echo
 echo rfriends3の実行方法
 echo 
-echo sh $homedir/rfriends3/rf3server.sh
+echo cd $homedir/rfriends3
+echo sh rf3server.sh
 echo
 echo 以下が表示されるので、webブラウザでアクセス
 echo
