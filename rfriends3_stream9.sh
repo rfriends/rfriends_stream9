@@ -17,7 +17,9 @@ userstr="s/rfriendsuser/${user}/g"
 echo
 echo rfriends Setup Utility CentOS Stream 9 $ver
 echo
-#setenforce 0
+# enforceをPermissiveに設定
+setenforce 0
+# タイムゾーンを東京に
 timedatectl set-timezone Asia/Tokyo
 # -----------------------------------------
 echo
