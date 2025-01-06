@@ -133,7 +133,7 @@ echo
 # -----------------------------------------
 echo lighttpd $optlighttpd
 if [ $optlighttpd = "on" ]; then
-sudo $dnf -y install lighttpd php-cgi
+sudo $dnf -y install lighttpd lighttpd-fastcgi php-cgi
 cd $dir
 #
 # lighttpd
