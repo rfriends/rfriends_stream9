@@ -1,8 +1,11 @@
 rfriends_stream9はCentOS Stream 9環境でrfriends3を動作させるスクリプトです。  
 > [!CAUTION]
-> Negative potential consequences of an action.
-vi /etc/selinux/config
-
+> SELinuxがenfocingの場合、Webアクセスが拒否されます。
+> 簡単で安易な方法は
+> sudo vi /etc/selinux/config
+> SELINUX=disabled
+> 変更後、再起動です。
+> 
 
 動作確認済  
 CentOS Stream 9    
