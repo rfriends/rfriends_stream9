@@ -21,9 +21,6 @@ echo
 sudo setenforce 0
 # タイムゾーンを東京に
 timedatectl set-timezone Asia/Tokyo
-# selinux
-sudo semanage port -a -t http_port_t -p tcp 8000
-sudo semanage port -l | grep http_port_t
 # -----------------------------------------
 echo
 echo RPM Fusion リポジトリを追加
@@ -33,7 +30,6 @@ sudo yum -y config-manager --set-enabled crb
 
 #sudo yum -y install --nogpgcheck https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm -y
 #sudo yum -y install --nogpgcheck https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm -y
-
 # -----------------------------------------
 optlighttpd="on"
 optsamba="on"
@@ -41,6 +37,24 @@ export optlighttpd
 export optsamba
 #
 sh centos_install.sh 2>&1 | tee centos_install.log
+# -----------------------------------------
+# selinux disabled
+grep "^SELINUX=enforcing" /etc/selinux/config> /dev/null
+if [ $? = 0 ]; then
+  echo "現在、SELinux が有効(enforcing)に設定されています。"
+	read -p "無効相当(Permissive)に変更しますか？ (y/N) " ans
+	case "$ans" in
+  		"y" | "Y" )
+			sudo sed -i "/^SELINUX=enforcing/c SELINUX=Permissive" /etc/selinux/config
+			echo "変更しました。"
+			echo "再起動してください。"
+			echo 
+    			;;
+  		* )
+			echo 
+    			;;
+	esac
+fi
 # -----------------------------------------
 # 終了
 # -----------------------------------------
