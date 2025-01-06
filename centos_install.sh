@@ -3,7 +3,8 @@
 # install rfriends for centos
 # =========================================
 # 1.0 2025/01/04 github
-ver=1.0
+# 1.1 2025/01/06 add samba,lighttpd,webdav
+ver=1.1
 # -----------------------------------------
 echo
 echo rfriends3 for centos $ver
@@ -144,15 +145,12 @@ sudo chown root:root /etc/lighttpd/lighttpd.conf
 #
 # modules
 sudo cp -p /etc/lighttpd/modules.conf /etc/lighttpd/modules.conf.org
-#sed -e s%rfriendshomedir%$homedir%g modules.conf.skel > modules.conf
-#sed -i s%rfriendsuser%$user%g modules.conf
 sudo cp -p modules.conf.skel /etc/lighttpd/modules.conf
 sudo chown root:root /etc/lighttpd/modules.conf
 #
 # fastcgi
 sudo cp -p /etc/lighttpd/conf.d/fastcgi.conf /etc/lighttpd/conf.d/fastcgi.conf.org
-sed -e s%rfriendshomedir%$homedir%g fastcgi.conf.skel > fastcgi.conf
-sudo cp -p fastcgi.conf /etc/lighttpd/conf.d/fastcgi.conf
+sudo cp -p fastcgi.conf.skel /etc/lighttpd/conf.d/fastcgi.conf
 sudo chown root:root /etc/lighttpd/conf.d/fastcgi.conf
 #
 # webdav
