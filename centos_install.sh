@@ -131,7 +131,9 @@ echo install lighttpd
 echo
 # -----------------------------------------
 echo lighttpd $optlighttpd
-echo not support
+if [ $optlighttpd = "on" ]; then
+
+fi
 # -----------------------------------------
 echo
 if [ $sys = "1" ]; then
@@ -148,6 +150,7 @@ echo home directry : $homedir
 # -----------------------------------------
 #  ビルトインサーバ
 #
+if [ $optlighttpd != "on" ]; then
 echo
 echo rfriends3の実行方法
 echo 
@@ -156,9 +159,9 @@ echo sh rf3server.sh
 echo
 echo 以下が表示されるので、webブラウザでアクセス
 echo
-echo rfriends3_server start
 echo xxx.xxx.xxx.xxx:8000
 echo
+fi
 # -----------------------------------------
 # finish
 # -----------------------------------------
