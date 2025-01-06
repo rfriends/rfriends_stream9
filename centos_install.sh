@@ -171,10 +171,6 @@ else
   sudo service lighttpd restart
 fi
 # -----------------------------------------
-echo
-enforce=`getenforce`
-echo SELinux : $enforce
-
 if [ $sys -eq 1 ]; then
   echo "type : systemd" 
 else 
