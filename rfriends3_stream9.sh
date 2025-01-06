@@ -21,9 +21,9 @@ echo
 sudo setenforce 0
 # タイムゾーンを東京に
 timedatectl set-timezone Asia/Tokyo
-# firewall
-sudo firewall-cmd -permanent -zone=public -add-service=http
-sudo firewall-cmd -reload
+# selinux
+sudo semanage port -a -t http_port_t -p tcp 8000
+sudo semanage port -l | grep http_port_t
 # -----------------------------------------
 echo
 echo RPM Fusion リポジトリを追加
