@@ -18,12 +18,12 @@ echo
 echo rfriends Setup Utility CentOS Stream 9 $ver
 echo
 # enforceをPermissiveに設定
-setenforce 0
+sudo setenforce 0
 # タイムゾーンを東京に
 timedatectl set-timezone Asia/Tokyo
 # firewall
-sudo firewall-cmd –permanent –zone=public –add-service=http
-sudo firewall-cmd –reload
+sudo firewall-cmd -permanent -zone=public -add-service=http
+sudo firewall-cmd -reload
 # -----------------------------------------
 echo
 echo RPM Fusion リポジトリを追加
