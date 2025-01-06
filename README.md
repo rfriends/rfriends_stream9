@@ -2,8 +2,8 @@ rfriends_stream9はCentOS Stream 9環境でrfriends3を動作させるスクリ�
 > [!CAUTION]  
 > SELINUX=enforcing ではWebアクセスが拒否されます。  
 > 簡単で安易な方法は  
-> 1. $ sudo setenfce 0
->    $ sudo systemctl restart lighttpd 
+> 1. $ sudo setenfce 0  
+>    $ sudo systemctl restart lighttpd  
 >    ただし再起動ごとに設定  
 > 3. $ sudo vi /etc/selinux/config  
 >    SELINUX=disabled  
