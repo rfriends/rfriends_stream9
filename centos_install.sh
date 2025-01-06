@@ -162,7 +162,7 @@ ln -nfs temp webdav
 #
 fi
 #
-#mkdir -p $homedir/lighttpd/uploads/
+mkdir -p $homedir/lighttpd
 echo lighttpd > $homedir/rfriends3/rfriends3_boot.txt
 if [ $sys -eq 1 ]; then
   sudo systemctl enable lighttpd
@@ -172,6 +172,9 @@ else
 fi
 # -----------------------------------------
 echo
+enforce=`getenforce`
+echo SELinux : $enforce
+
 if [ $sys -eq 1 ]; then
   echo "type : systemd" 
 else 
