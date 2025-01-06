@@ -9,6 +9,8 @@ echo
 echo rfriends3 for centos $ver
 echo `date`
 echo
+# もしdnfが使えないときは、dnf=yum
+dnf=dnf
 # -----------------------------------------
 sys=`pgrep -o systemd`
 if [ $? -ne 0 ]; then
@@ -43,20 +45,20 @@ echo
 echo install tools
 echo
 # =========================================
-sudo yum update -y
+sudo $dnf update -y
 
-sudo yum -y install p7zip net-tools
-sudo yum -y install php-cli php-xml php-zip php-mbstring php-json php-curl php-intl 
-sudo yum -y install ffmpeg-free
+sudo $dnf -y install p7zip net-tools
+sudo $dnf -y install php-cli php-xml php-zip php-mbstring php-json php-curl php-intl 
+sudo $dnf -y install ffmpeg-free
 
-#sudo yum -y install AtomicParsley
+#sudo $dnf -y install AtomicParsley
 #wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
 sudo rpm -ivh AtomicParsley-0.9.5-19.fc36.x86_64.rpm 
 
-sudo yum -y install chromium
-sudo yum -y install openssh-server
+sudo $dnf -y install chromium
+sudo $dnf -y install openssh-server
 
-sudo yum -y install dnsutils unzip nano vim tzdata at cronie wget curl 
+sudo $dnf -y install dnsutils unzip nano vim tzdata at cronie wget curl 
 # -----------------------------------------
 # .vimrcを設定する
 # -----------------------------------------
@@ -100,7 +102,7 @@ echo
 # -----------------------------------------
 echo samba $optsamba
 if [ $optsamba = "on" ]; then
-sudo yum -y install samba
+sudo $dnf -y install samba
 sudo mkdir -p /var/log/samba
 sudo chown root:adm /var/log/samba
 
