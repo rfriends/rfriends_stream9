@@ -47,7 +47,7 @@ sudo yum update -y
 
 sudo yum -y install p7zip net-tools
 sudo yum -y install php-cli php-xml php-zip php-mbstring php-json php-curl php-intl 
-sudo yum -y install ffmpeg ffmpeg-devel
+sudo yum -y install ffmpeg-free
 
 #sudo yum -y install AtomicParsley
 #wget https://mirror.perchsecurity.com/pub/archive/fedora/linux/releases/36/Everything/x86_64/os/Packages/a/AtomicParsley-0.9.5-19.fc36.x86_64.rpm  
