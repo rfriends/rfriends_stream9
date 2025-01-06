@@ -88,7 +88,7 @@ EOF
 # -----------------------------------------
 # systemd or service
 # -----------------------------------------
-if [ $sys = "1" ]; then
+if [ $sys -eq 1 ]; then
   sudo systemctl enable atd
   sudo systemctl enable crond
 else 
@@ -118,7 +118,7 @@ usrdir = "$homedir/smbdir/usr2/"
 tmpdir = "$homedir/tmp/"
 EOF
 
-if [ $sys = "1" ]; then
+if [ $sys -eq 1 ]; then
   sudo systemctl enable smb
   sudo systemctl restart smb
 else 
@@ -132,11 +132,49 @@ echo
 # -----------------------------------------
 echo lighttpd $optlighttpd
 if [ $optlighttpd = "on" ]; then
-
+sudo $dnf -y install lighttpd php-cgi
+cd $dir
+#
+# lighttpd
+sudo cp -p /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.org
+sed -e s%rfriendshomedir%$homedir%g lighttpd.conf.skel > lighttpd.conf
+sed -i s%rfriendsuser%$user%g lighttpd.conf
+sudo cp -p lighttpd.conf /etc/lighttpd/lighttpd.conf
+sudo chown root:root /etc/lighttpd/lighttpd.conf
+#
+# modules
+sudo cp -p /etc/lighttpd/modules.conf /etc/lighttpd/modules.conf.org
+#sed -e s%rfriendshomedir%$homedir%g modules.conf.skel > modules.conf
+#sed -i s%rfriendsuser%$user%g modules.conf
+sudo cp -p modules.conf.skel /etc/lighttpd/modules.conf
+sudo chown root:root /etc/lighttpd/modules.conf
+#
+# fastcgi
+sudo cp -p /etc/lighttpd/conf.d/fastcgi.conf /etc/lighttpd/conf.d/fastcgi.conf.org
+sed -e s%rfriendshomedir%$homedir%g fastcgi.conf.skel > fastcgi.conf
+sudo cp -p fastcgi.conf /etc/lighttpd/conf.d/fastcgi.conf
+sudo chown root:root /etc/lighttpd/conf.d/fastcgi.conf
+#
+# webdav
+sudo cp -p /etc/lighttpd/conf.d/webdav.conf /etc/lighttpd/conf.d/webdav.conf.org
+sudo cp -p webdav.conf.skel /etc/lighttpd/conf.d/webdav.conf
+sudo chown root:root /etc/lighttpd/conf.d/webdav.conf
+cd $homedir/rfriends3/script/html
+ln -nfs temp webdav
+#
+fi
+#
+#mkdir -p $homedir/lighttpd/uploads/
+echo lighttpd > $homedir/rfriends3/rfriends3_boot.txt
+if [ $sys -eq 1 ]; then
+  sudo systemctl enable lighttpd
+  sudo systemctl restart lighttpd
+else 
+  sudo service lighttpd restart
 fi
 # -----------------------------------------
 echo
-if [ $sys = "1" ]; then
+if [ $sys -eq 1 ]; then
   echo "type : systemd" 
 else 
   echo "type : initd"
