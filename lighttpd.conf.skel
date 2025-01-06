@@ -19,7 +19,7 @@
 var.home_dir    = "/var/lib/lighttpd"
 var.conf_dir    = "/etc/lighttpd"
 
-var.hdir        = "/home/mapi"
+var.hdir        = "rfriendshomedir"
 var.log_root    = hdir + "/lighttpd"
 var.server_root = hdir + "/rfriends3"
 var.state_dir   = hdir + "/lighttpd"
@@ -107,8 +107,8 @@ server.port = 8000
 ## Run as a different username/groupname.
 ## This requires root permissions during startup. 
 ##
-server.username  = "mapi"
-server.groupname = "mapi"
+server.username  = "rfriendsuser"
+server.groupname = "rfriendsuser"
 #server.username  = "lighttpd"
 #server.groupname = "lighttpd"
 
