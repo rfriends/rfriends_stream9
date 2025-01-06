@@ -1,4 +1,12 @@
-rfriends_stream9はCentOS Stream 9環境でrfriends3を動作させるスクリプトです。  
+rfriends_stream9はCentOS Stream 9環境でrfriends3を動作させるスクリプトです。
+> [!CAUTION]  
+> SELINUX=enforcing ではWebアクセスが拒否されます。  
+> 簡単で安易な方法は  
+> 1. $ sudo setenfce 0  
+>    ただし再起動ごとに設定  
+> 2. $ sudo vi /etc/selinux/config  
+>    SELINUX=disabled  
+>    で再起動  
 
 動作確認済  
 CentOS Stream 9    
