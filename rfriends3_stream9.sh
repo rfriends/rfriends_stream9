@@ -21,6 +21,9 @@ echo
 setenforce 0
 # タイムゾーンを東京に
 timedatectl set-timezone Asia/Tokyo
+# firewall
+sudo firewall-cmd –permanent –zone=public –add-service=http
+sudo firewall-cmd –reload
 # -----------------------------------------
 echo
 echo RPM Fusion リポジトリを追加
