@@ -1,5 +1,8 @@
 rfriends_stream9はCentOS Stream 9環境でrfriends3を動作させるスクリプトです。  
-現在は、samba,lighttpdはインストールされません。
+> [!CAUTION]
+> Negative potential consequences of an action.
+vi /etc/selinux/config
+
 
 動作確認済  
 CentOS Stream 9    
