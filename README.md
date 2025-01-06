@@ -17,9 +17,10 @@ alma linux 9.4
   
 cd ~/  
 sudo dnf install git  
+rm -rf rfriends_stream9  
 git clone https://github.com/rfriends/rfriends_stream9.git  
 cd rfriends_stream9  
-sh rfriends3_stream9.sh  
+sh rfriends_stream9.sh  
 
 注意）webブラウザにアドレスを入力するとき  
 http://XXX.XXX.XXX.XXX:8000  
