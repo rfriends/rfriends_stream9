@@ -25,4 +25,4 @@ sh rfriends_stream9.sh
 注意）webブラウザにアドレスを入力するとき  
 http://XXX.XXX.XXX.XXX:8000  
 となっていることを確認してください。  
-http ではエラーになります。
+https ではエラーになります。
