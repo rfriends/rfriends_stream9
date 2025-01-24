@@ -94,7 +94,7 @@ if [ $sys -eq 1 ]; then
   sudo systemctl enable crond
 else 
   sudo service atd restart
-  sudo service cron restart
+  sudo service crond restart
 fi
 # -----------------------------------------
 echo
@@ -123,7 +123,7 @@ if [ $sys -eq 1 ]; then
   sudo systemctl enable smb
   sudo systemctl restart smb
 else 
-  sudo service smbd restart
+  sudo service smb restart
 fi
 fi
 # -----------------------------------------
